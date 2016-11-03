@@ -23,23 +23,15 @@ Lightning applications make it easy to work with data. In this module, you creat
     public with sharing class ContactListController {
 
         @AuraEnabled
-        public static List<Contact> findAll() {
-            return [SELECT id, name, phone FROM Contact LIMIT 50];
+        public static List<Contact> findAll(Id accountId) {
+            return [SELECT id, name, phone FROM Contact Where Id = :accountId LIMIT 50];
         }
 
         @AuraEnabled
-        public static List<Contact> findByName(String searchKey) {
+        public static List<Contact> findByName(String searchKey,Id accountId) {
             String name = '%' + searchKey + '%';
             return [SELECT id, name, phone FROM Contact WHERE name LIKE :name LIMIT 50];
         }
-
-        @AuraEnabled
-        public static Contact findById(String contactId) {
-            return [SELECT id, name, title, phone, mobilephone, Account.Name
-                        FROM Contact WHERE Id = :contactId];
-        }
-
-
     }
     ```
 
