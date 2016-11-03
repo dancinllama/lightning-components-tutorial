@@ -36,7 +36,7 @@ In this module, you will learn how to use an interface to expose a Lightning Com
 1. In Setup, Click on "Lightning Experience" near the top.  If you can't find it, use the Quick Search functionality.
 2. Scroll to the bottom of the Lightning Experience screen, and enable "Lightning Experience" by toggling the switch on.
 3. Click on your username, then click "Switch to Lightning Experience" and watch the magic happen.
-    - ![](images/switch_to_lex.jpg)
+    - ![](images/switch_to_lex.pnh)
     
 ## Step 3: Create the Quick Action
 1. Open Setup in LEX.  It's still in the top right of the screen, just looks a bit different:
