@@ -141,20 +141,20 @@ Good News!  Lightning Design System is already integrated into Lightning Compone
                                 </dt>
                                 <dd class="slds-dl--horizontal__detail slds-tile__meta">
                                     <p class="slds-truncate" title="{!contact.Email}">{!contact.Email}</p>
-                            </dd>
-                            <dt class="slds-dl--horizontal__label">
-                                <p class="slds-truncate" title="Email">Phone:</p>
-                            </dt>
-                            <dd class="slds-dl--horizontal__detail slds-tile__meta">
-                                <p class="slds-truncate" title="{!contact.Phone}">{!contact.Phone}</p>
-                            </dd>
-                        </dl>
+                                </dd>
+                                <dt class="slds-dl--horizontal__label">
+                                    <p class="slds-truncate" title="Email">Phone:</p>
+                                </dt>
+                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                    <p class="slds-truncate" title="{!contact.Phone}">{!contact.Phone}</p>
+                                </dd>
+                            </dl>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </aura:iteration>
-    </div>
-</aura:component>
+            </aura:iteration>
+        </div>
+    </aura:component>
     ```
 
 2. Click **File** > **Save** to save the file
