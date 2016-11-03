@@ -9,6 +9,7 @@ In this module, you create a Lightning Component responsible for displaying the 
 - Use component attributes
 - Use event handlers
 - Use a Lightning Component in another Lightning Component
+- Styling a Lightning Component using the Salesforce Lightning Design System (SLDS)
 
 
 ## Step 1: Create the Component
@@ -100,44 +101,67 @@ In this module, you create a Lightning Component responsible for displaying the 
 
 1. Click **File** > **Save** to save the file
 
-1. Go back to the Salesforce1 app and reload **Quick Contacts** from the menu to see the changes:
+1. Reload the Account's record page and click on the Search Contacts Quick Action.  You should see a screen similar to the following:
 
-    ![](images/version2.jpg)
+    ![](images/search_contacts_nostyle.png)
 
+    - Looks pretty, right?  No?  Well, let's style it using the Salesforce Lightning Design System (SLDS).
 
-## Step 4: Style the ContactList Component
+## Step 4: Style the ContactList Component using SLDS
 
-In this step, you'll add some CSS styles to the component to make it look like a standard mobile list. You'll remove the item bullets, add a horizontal line between items, and fine tune margins.
+In this step, we will style our contact list to use styles from the Salesforce Lightning Design System. SLDS is a set of css files, icons, and other UX pieces that make applications look like Lightning Experience.  If you're interested in reading more about SLDS, or poking around at SLDS examples and components, you can head over to <a href="https://www.lightningdesignsystem.com/">https://www.lightningdesignsystem.com/</a>
 
+Good News!  Lightning Design System is already integrated into Lightning Components.  Although you can, there is no need to include additional stylesheets.
 
-1. Click **STYLE**
-
-    ![](images/component-style.jpg)
-
-1. Implement the following styles:
+1. Update the Contact List component to utilize a Lightning Design System "Tile" component:
 
     ```
-    .THIS {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
+    <aura:component controller="ContactListController">
+        <aura:attribute name="contacts" type="Contact" />
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-    .THIS li {
-        border-bottom: solid 1px #DDDDDD;
-        padding: 8px;
-    }
-
-    .THIS p {
-        margin: 4px;
-    }
+        <div class="slds">
+            <aura:iteration items="{!v.contacts}" var="contact">
+                <div class="slds-tile slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:contact" />
+                    </div>
+                    <div class="slds-media__body">
+                        <h3 class="slds-truncate" title="Salesforce UX"><a href="javascript:void(0);">{!contact.Name}</a></h3>
+                        <div class="slds-tile__detail slds-text-body--small">
+                            <dl class="slds-dl--horizontal">
+                                <dt class="slds-dl--horizontal__label">
+                                    <p class="slds-truncate" title="Title">Title: </p>
+                                </dt>
+                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                    <p class="slds-truncate" title="{!contact.Title}">{!contact.Title}</p>
+                                </dd>
+                                <dt class="slds-dl--horizontal__label">
+                                    <p class="slds-truncate" title="Email">Email:</p>
+                                </dt>
+                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                    <p class="slds-truncate" title="{!contact.Email}">{!contact.Email}</p>
+                            </dd>
+                            <dt class="slds-dl--horizontal__label">
+                                <p class="slds-truncate" title="Email">Phone:</p>
+                            </dt>
+                            <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate" title="{!contact.Phone}">{!contact.Phone}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </aura:iteration>
+    </div>
+</aura:component>
     ```
 
-1. Click **File** > **Save** to save the file
+2. Click **File** > **Save** to save the file
 
-1. Go back to the Salesforce1 app and reload **Quick Contacts** from the menu to see the changes:
+3. Reload the Account record detail and click on Search Contacts, and you should see the SLDS styles:
 
-    ![](images/version3.jpg)
+    ![](images/search_contacts_styled.png)
 
 
 
