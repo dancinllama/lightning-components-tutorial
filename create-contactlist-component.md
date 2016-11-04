@@ -23,6 +23,7 @@ In this module, you create a Lightning Component responsible for displaying the 
 
         <aura:attribute name="contacts" type="Contact[]"/>
         <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        <aura:attribute name="recordId" type="Id" />
 
         <ul>
             <aura:iteration items="{!v.contacts}" var="contact">
@@ -44,6 +45,7 @@ In this module, you create a Lightning Component responsible for displaying the 
     - The **init** handler is defined to execute some code when the component is initialized. That code (**doInit**) is defined in the component's.
 **client-side controller** (you'll implement the controller in the next step).
     - ```<aura:iteration>``` is used to iterate through the list of contacts and create an ```<li>``` for each contact
+    - We will be using the recordId attribute later on.
 
 
 1. Click **File** > **Save** to save the file.
@@ -58,21 +60,27 @@ In this module, you create a Lightning Component responsible for displaying the 
 1. Implement the Controller as follows:
 
     ```
-    ({
-        doInit : function(component, event) {
-            var action = component.get("c.findAll");
-            action.setCallback(this, function(a) {
-                component.set("v.contacts", a.getReturnValue());
-            });
-            $A.enqueueAction(action);
-        }
-    })
+    doInit : function(component,event){
+        var action = component.get("c.findAll");
+        
+        action.setParams({
+            accountId : component.get("v.recordId")
+        });
+        
+        action.setCallback(this,function(a){
+            component.set("v.contacts",a.getReturnValue());
+        });
+        
+        $A.enqueueAction(action);
+    }
     ```
 
     ### Code Highlights:
     - The controller has a single function called **doInit**. This is the function the component calls when it is initialized.
     - You first get a reference to the **findAll()** method in the component's server-side controller (ContactListController), and store it in the **action** variable.
+    - Next, you specify a value to pass in for the accountId parameter in the findAll method.  This accountId parameter will eventually come from the Account record that the quick action is working with.
     - Since the call to the server's findAll() method is asynchronous, you then register a callback function that is executed when the call returns. In the callback function, you simply assign the list of contacts to the component's **contacts** attribute.
+    - For now, only contacts with a null AccountId field will be returned.
     - $A.enqueueAction(action) sends the request the server. More precisely, it adds the call to the queue of asynchronous server calls. That queue is an optimization feature of Lightning.
 
 1. Click **File** > **Save** to save the file
@@ -87,17 +95,21 @@ In this module, you create a Lightning Component responsible for displaying the 
     ![](images/lightning-resources.jpg)
 
 
-1. Replace the ContactList placeholder with the actual component:
+1. Replace the placeholder with the actual component:
 
     ```
-    <aura:component implements="force:lightningQuickAction">
+    <aura:component implements="force:lightningQuickAction,force:hasRecordId">
 
         <c:ContactList/>
 
     </aura:component>
     ```
 
-    > See the implements attribute?  Components can implement interfaces to inherit functionality.  In this tutorial, we are using the force:lightningQuickAction interface, which allows us to display the component as a quick action in Lightning Experience.  Also, please note the **c:**, which is the default namespace for Lightning components.
+    ### Code Highlights:
+    - We are using the implements tag to specify various interfaces our component will use.
+    - The force:lightningQuickAction interface allows us to add the component as a quick action in Lightning Experience.
+    - The force:hasRecordId interface automatically populates an attribute called recordId, so that we can filter contacts by the correct Account.
+    - **c:** Is the default namespace.  If we wanted to include components from the App Exchange or a package, then we would use that package's prefix when including the component(s).
 
 1. Click **File** > **Save** to save the file
 
@@ -105,7 +117,7 @@ In this module, you create a Lightning Component responsible for displaying the 
 
     ![](images/search_contacts_nostyle.png)
 
-Looks pretty, right?  No?  Well, let's style it using the Salesforce Lightning Design System (SLDS).
+The quick action pretty, right?  No?  Well, let's style it using the Salesforce Lightning Design System (SLDS).
 
 ## Step 4: Style the ContactList Component using SLDS
 
@@ -113,14 +125,14 @@ In this step, we will style our contact list to use styles from the Salesforce L
 
 Good News!  Lightning Design System is already integrated into Lightning Components.  Although you can, there is no need to include additional stylesheets.
 
-1. Update the Contact List component to utilize a Lightning Design System "Tile" component:
+1. Update the Contact List component to utilize a Lightning Design System "Tile" component for each Contact record we display:
 
     ```
     <aura:component controller="ContactListController">
-        <aura:attribute name="contacts" type="Contact" />
+        <aura:attribute name="recordId" type="Id" />
+        <aura:attribute name="contacts" type="Contact[]" />
         <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-
-        <div class="slds">
+        <div class="slds-form-element">
             <aura:iteration items="{!v.contacts}" var="contact">
                 <div class="slds-tile slds-media">
                     <div class="slds-media__figure">
