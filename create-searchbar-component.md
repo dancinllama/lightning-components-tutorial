@@ -143,7 +143,7 @@ There are two types of events in Lightning Components: Component and Application
 
 1. Go back to the Account record page and refresh.  Click the Search Contacts quick action to see the changes. Type a few characters in the search bar to search for contacts.
 
-    ![](images/version4.jpg)
+    ![](images/search_contacts_finalresult.png)
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
