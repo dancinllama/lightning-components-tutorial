@@ -14,12 +14,14 @@ In this module, you create a SearchBar component that allows the user to search 
 
 Now that we decided to build SearchBar and ContactList as two separate components, we need a way for ContactList to know when the search key changes so that it can retrieve and display the matching contacts. Lightning Events enable that kind of communication between components. In this step, you create a Lightning Event used by the SearchBar component to notify other components when the search key changes.
 
+There are two types of events in Lightning Components: Component and Application events. In our example, we will be using a component event.  For
+
 1. In the Developer Console, click **File** > **New** > **Lightning Event**. Specify **SearchKeyChange** as the bundle name and click **Submit**
 
 1. Implement the event as follows:
 
     ```
-    <aura:event type="APPLICATION">
+    <aura:event type="COMPONENT">
         <aura:attribute name="searchKey" type="String"/>
     </aura:event>
     ```
@@ -36,16 +38,20 @@ Now that we decided to build SearchBar and ContactList as two separate component
 
     ```
     <aura:component>
-
-        <div>
-            <input type="text" class="form-control"
-                    placeholder="Search" onkeyup="{!c.searchKeyChange}"/>
+        <aura:registerEvent name="searchContactsEvt" type="c:SearchKeyChange" />
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <input id="text-input-01" class="slds-input" type="text" placeholder="Search Contacts" onkeyup="{!c.searchKeyChange}" />
+            </div>
         </div>
-
     </aura:component>
     ```
+    There is a lot going on in the 7 lines of markup here, so let's review some highlights.
+    
     ### Code Highlights:
     - This is a simple component with a single input field.
+    - The input field is styled using the SLDS again.  Notice the divs and slds classes.
+    - We are registering the event we created earlier. Registering the event, allows us to fire the event from the client-side controller.  This is required for firing component level events, but not so for application events.  
     - When the user types in a character (**onkeyup**), the **searchKeyChange()** function is executed in the component's client-side controller (you'll code that function in the next step). Using this approach the search is refined every time the user types in a character.
 
 
@@ -60,7 +66,7 @@ Now that we decided to build SearchBar and ContactList as two separate component
     ```
     ({
         searchKeyChange: function(component, event, helper) {
-            var myEvent = $A.get("e.c:SearchKeyChange");
+            var myEvent = component.getEvent("searchContactsEvt");
             myEvent.setParams({"searchKey": event.target.value});
             myEvent.fire();
         }
@@ -68,36 +74,12 @@ Now that we decided to build SearchBar and ContactList as two separate component
     ```
 
     ### Code Highlights:
-    - The function first gets an instance of the **SearchKeyChange** event
+    - The function first gets an instance of the **SearchKeyChange** component event.  (Application events are slightly different in this regard)
     - It then sets the event's searchKey parameter to the input field's new value
-    - Finally, it fires the event so that registered listeners can catch it
+    - Finally, it fires the event so that listeners / handlers can catch it
 
 1. Click **File** > **Save** to save the file
 
-
-## Step 4: Style the Component
-
-1. Click **STYLE**
-
-    ![](images/searchbar-style.jpg)
-
-1. Implement the following styles:
-
-    ```
-    .THIS {
-        width: 100%;
-        padding: 8px;
-    }
-
-    .THIS input {
-        width: 100%;
-        padding: 8px;
-        -webkit-appearance: none;
-        border: solid 1px #dddddd;
-    }
-    ```
-
-1. Click **File** > **Save** to save the file
 
 ## Step 5: Listen for the SearchKeyChange Event in ContactList
 
@@ -106,7 +88,8 @@ Now that we decided to build SearchBar and ContactList as two separate component
 1. Add an event handler for the **SearchKeyChange** event (right after the init handler):
 
     ```
-    <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
+    <aura:handler name="bubblingEvent" event="c:compEvent" action="{!c.handleBubbling}"
+    includeFacets="true" />
     ```
 
     ### Code Highlight:
