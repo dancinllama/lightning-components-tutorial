@@ -37,8 +37,7 @@ There are two types of events in Lightning Components: Component and Application
 2. Implement the component as follows:
 
     ```
-    <aura:component>
-        <aura:registerEvent name="searchContactsEvt" type="c:SearchKeyChange" />
+    <aura:component >
         <div class="slds-form-element">
             <div class="slds-form-element__control">
                 <input id="text-input-01" class="slds-input" type="text" placeholder="Search Contacts" onkeyup="{!c.searchKeyChange}" />
@@ -51,7 +50,6 @@ There are two types of events in Lightning Components: Component and Application
     ### Code Highlights:
     - This is a simple component with a single input field.
     - The input field is styled using the SLDS again.  Notice the divs and slds classes.
-    - We are registering the event we created earlier. Registering the event, allows us to fire the event from the client-side controller.  This is required for firing component level events, but not so for application events.  
     - When the user types in a character (**onkeyup**), the **searchKeyChange()** function is executed in the component's client-side controller (you'll code that function in the next step). Using this approach the search is refined every time the user types in a character.
 
 
@@ -66,7 +64,7 @@ There are two types of events in Lightning Components: Component and Application
     ```
     ({
         searchKeyChange: function(component, event, helper) {
-            var myEvent = component.getEvent("searchContactsEvt");
+            var myEvent = $A.get("e.c:SearchKeyChange");
             myEvent.setParams({"searchKey": event.target.value});
             myEvent.fire();
         }
@@ -88,8 +86,7 @@ There are two types of events in Lightning Components: Component and Application
 1. Add an event handler for the **SearchKeyChange** event (right after the init handler):
 
     ```
-    <aura:handler name="bubblingEvent" event="c:compEvent" action="{!c.handleBubbling}"
-    includeFacets="true" />
+    <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
     ```
 
     ### Code Highlight:
@@ -101,24 +98,25 @@ There are two types of events in Lightning Components: Component and Application
 1. Add the **searchKeyChange()** function implemented as follows:
 
     ```
-    searchKeyChange: function(component, event) {
-        var searchKey = event.getParam("searchKey");
+    ,searchKeyChange: function(component, event) {
         var action = component.get("c.findByName");
-        action.setParams({
-          "searchKey": searchKey
-        });
+	    action.setParams({
+	      "searchKey": event.getParam("searchKey")
+            ,"accountId" : component.get("v.recordId")
+	    });
         action.setCallback(this, function(a) {
-        	component.set("v.contacts", a.getReturnValue());
-        });
-        $A.enqueueAction(action);
-    }
+	        component.set("v.contacts", a.getReturnValue());
+	    });
+	    $A.enqueueAction(action);
+	}
     ```
 
-    > Make sure you separate the doInit() and the searchKeyChange() functions with a comma
+    > Make sure you separate the doInit() and the searchKeyChange() functions with a comma (included in the snippet above)
 
     ### Code Highlights:
     - You first get the value of the new searchKey available in the event object.
     - You then invoke the **findByName()** method in the Apex controller you created in module 3.
+    - You're passing in two attributes to the findByName method, the searchKey and the recordId.  The recordId comes in automatically since we implemented the force:hasRecordId interface in the parent Quick Contacts component earlier.
     - When the asynchronous call returns, you assign the list of contacts returned by findByName() to the component's **contacts** attribute.
 
 
@@ -131,17 +129,19 @@ There are two types of events in Lightning Components: Component and Application
 1. Add the SearchBar component before the ContactList component:
 
     ```
-    <aura:component implements="force:appHostable">
-
-        <c:SearchBar/>
-        <c:ContactList/>
-
+    <aura:component implements="force:lightningQuickAction,force:hasRecordId">
+        <div class="slds">
+            <div class="slds-form--stacked">
+                <c:SearchBar2 />
+                <c:ContactList2 recordId="{!v.recordId}" />
+            </div>
+        </div>
     </aura:component>
     ```
 
 1. Click **File** > **Save** to save the file
 
-1. Go back to the Salesforce1 app and reload **Quick Contacts** from the menu to see the changes. Type a few characters in the search bar to search for contacts.
+1. Go back to the Account record page and refresh.  Click the Search Contacts quick action to see the changes. Type a few characters in the search bar to search for contacts.
 
     ![](images/version4.jpg)
 
