@@ -21,23 +21,22 @@ Lightning applications make it easy to work with data. In this module, you creat
 
     ```java
     public with sharing class ContactListController {
-
         @AuraEnabled
-        public static List<Contact> findAll(Id accountId) {
-            return [SELECT id, name, phone FROM Contact Where Id = :accountId LIMIT 50];
+        public static List<Contact> findByName(String searchKey, Id accountId) {
+            String name = '%' + searchKey + '%';
+            return [SELECT id, name, phone, title, email FROM Contact WHERE AccountId = :accountId And Name LIKE :name LIMIT 50];
         }
 
         @AuraEnabled
-        public static List<Contact> findByName(String searchKey,Id accountId) {
-            String name = '%' + searchKey + '%';
-            return [SELECT id, name, phone FROM Contact WHERE name LIKE :name LIMIT 50];
+        public static List<Contact> findAll(Id accountId){
+            return [Select Id,Name,Phone,Title,Email From Contact Where AccountId = :accountId];
         }
     }
     ```
 
 
     ### Code Highlights:
-    - **ContactListController** is a regular controller class with methods to retrieve contacts (findAll),  or to search contacts by name (findByName) or by id (findById).
+    - **ContactListController** is a regular controller class with methods to retrieve contacts (findAll),  or to search contacts by name (findByName).
     - The **@AuraEnabled** method annotation makes a method available to Lightning applications
 
 1. Click **File** > **Save** to save the file
