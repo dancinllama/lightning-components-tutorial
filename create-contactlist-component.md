@@ -90,14 +90,14 @@ In this module, you create a Lightning Component responsible for displaying the 
 1. Replace the ContactList placeholder with the actual component:
 
     ```
-    <aura:component implements="force:appHostable">
+    <aura:component implements="force:lightningQuickAction">
 
         <c:ContactList/>
 
     </aura:component>
     ```
 
-    > **c:** is the default namespace for Lightning components
+    > See the implements attribute?  Components can implement interfaces to inherit functionality.  In this tutorial, we are using the force:lightningQuickAction interface, which allows us to display the component as a quick action in Lightning Experience.  Also, please note the **c:**, which is the default namespace for Lightning components.
 
 1. Click **File** > **Save** to save the file
 
