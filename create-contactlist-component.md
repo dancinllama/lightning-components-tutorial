@@ -41,7 +41,7 @@ In this module, you create a Lightning Component responsible for displaying the 
     ### Code Highlights:
     - The controller assigned to the component (first line of code) refers to the **server-side controller** (ContactListController) you created in module 2.
     - The **contacts** attribute is defined to hold the list of Contact objects returned from the server.
-    - The **init** handler is defined to execute some code when the component is initialized. That code (**doInit**) is defined in the component's
+    - The **init** handler is defined to execute some code when the component is initialized. That code (**doInit**) is defined in the component's.
 **client-side controller** (you'll implement the controller in the next step).
     - ```<aura:iteration>``` is used to iterate through the list of contacts and create an ```<li>``` for each contact
 
@@ -105,7 +105,7 @@ In this module, you create a Lightning Component responsible for displaying the 
 
     ![](images/search_contacts_nostyle.png)
 
-    - Looks pretty, right?  No?  Well, let's style it using the Salesforce Lightning Design System (SLDS).
+Looks pretty, right?  No?  Well, let's style it using the Salesforce Lightning Design System (SLDS).
 
 ## Step 4: Style the ContactList Component using SLDS
 
