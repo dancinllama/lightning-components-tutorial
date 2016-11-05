@@ -28,12 +28,6 @@ The following browsers are supported when working with the Developer Console:
   - Most recent version of Safari
   - Internet Explorer 9 or higher
 
-## Issues
-
-- Please create an issue [here](https://github.com/ccoenraets/salesforce-lightning-tutorial/issues) if you run
-into any problem or if you have a suggestion to improve this workshop.
-- You can also use the Comments section at the bottom of each module to ask a question or report a problem.
-
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
