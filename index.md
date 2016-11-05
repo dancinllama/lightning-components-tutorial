@@ -5,7 +5,7 @@ title: Salesforce Developer Workshop
 In this tutorial, you use the Lightning Components to build a new feature "QuickContacts" feature in the Salesforce1 application. QuickContacts is a Lightning Component made of two other Lightning Components: SearchBar and ContactList. These components communicate using Lightning events.
 
 <div style="width:100%;text-align:center;">
-<img src="images/napkin.png" style="border:none;"/>
+<img src="images/lightning_component_intro.png" style="border:none;"/>
 </div>
 
 ## What You Will Learn
@@ -15,7 +15,7 @@ In this tutorial, you use the Lightning Components to build a new feature "Quick
 - Create Lightning Components
 - Create Lightning Events
 - Communicate between Lightning Components using Lightning Events
-- Use Static Resources in Lightning Components
+- Use the Salesforce Lightning Design System to style Lightning Components
 
 
 
