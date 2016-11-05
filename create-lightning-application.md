@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 3&#58; Creating a Quick Action component.
+title: Module 3&#58; Creating the QuickContacts component.
 ---
 
 In this module, you will learn how to use an interface to expose a Lightning Component as a Quick Action.
