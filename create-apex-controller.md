@@ -45,6 +45,6 @@ Lightning applications make it easy to work with data. In this module, you creat
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
 <a href="setup-environment.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="create-lightning-application.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+<a href="create-quickcontacts-component.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>
