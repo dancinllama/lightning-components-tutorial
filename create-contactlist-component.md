@@ -179,7 +179,7 @@ Good News!  Lightning Design System is already integrated into Lightning Compone
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="create-lightning-application.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="create-quickcontacts-component.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
 <a href="create-searchbar-component.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 </div>
 </div>
