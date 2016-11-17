@@ -6,6 +6,7 @@ In this module, you create a Developer Edition Account that provides you with a 
 
 ## What you will learn
 - Enable Lightning Components in your Salesforce org
+- Set up My Domain
 
 
 ## Step 1: Creating a Developer Edition Account
@@ -24,8 +25,21 @@ In this module, you create a Developer Edition Account that provides you with a 
 
 4. Click the link in the activation email. Enter your new password information, and click **Save**.
 
+## Step 2: Set up My Domain
 
-## Step 2: Enable Lightning Components
+Lightning Components require My Domain.  Let's set that up.
+
+
+1. Go To Setup->Domain Management->My Domain
+2. Enter a name, it must be unique.
+3. Click 'Check Availability'.
+4. Click 'Register Domain'. (Usually this takes a few minutes).
+5. Once the Domain is ready, refresh the page and log in with the domain.
+6. Deploy the domain to all users.
+
+## Step 3: Enable Lightning Components
+
+Depending on your developer org, you may need to enable Lightning Components.  Here's how to do so.
 
 1. In Setup, click **Develop** > **Lightning Components**
 
