@@ -101,9 +101,8 @@ In this module, you create a Lightning Component responsible for displaying the 
 
     ```
     <aura:component implements="force:lightningQuickAction,force:hasRecordId">
-
-        <c:ContactList/>
-
+        <aura:attribute name="recordId" type="Id" />
+        <c:ContactList recordId="{!v.recordId}"/>
     </aura:component>
     ```
 
