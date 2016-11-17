@@ -129,14 +129,15 @@ There are two types of events in Lightning Components: Component and Application
 1. Add the SearchBar component before the ContactList component:
 
     ```
-    <aura:component implements="force:lightningQuickAction,force:hasRecordId">
-        <div class="slds">
-            <div class="slds-form--stacked">
-                <c:SearchBar2 />
-                <c:ContactList2 recordId="{!v.recordId}" />
-            </div>
-        </div>
-    </aura:component>
+	<aura:component implements="force:lightningQuickAction,force:hasRecordId">
+	    <aura:attribute name="recordId" type="Id" />
+	    <div class="slds">
+		<div class="slds-form--stacked">
+		    <c:SearchBar />
+		    <c:ContactList recordId="{!v.recordId}" />
+		</div>
+	    </div>
+	</aura:component>
     ```
 
 1. Click **File** > **Save** to save the file
