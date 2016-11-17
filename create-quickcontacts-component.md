@@ -57,9 +57,10 @@ In this module, you will learn how to use an interface to expose a Lightning Com
 3. Click the wrench on the "Salesforce1 and Lightning Experience Actions" area on the page layout to enable it for editing.
 4. Drag the Search Contacts action from the "Salesforce1 & Lightning Actions" area of the layout pallette to the "Salesforce1 and Lightning Experience Actions" area on the page layout.
     - ![](images/lex_layout_action.png)
+5. Save the page layout.
 
 ## Step 5: Test the Quick Action
-1. Go to an Account in Lightning Experience.
+1. Create an Account, and then open it in Lightning Experience.
 2. The Quick Action should show up in the top right of the screen as a Quick Action.
 3. Click on "Search Contacts", and you should see a screen similar to the following:
    - ![](images/lex_action_demo1.png)
