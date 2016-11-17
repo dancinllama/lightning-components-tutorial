@@ -21,7 +21,7 @@ There are two types of events in Lightning Components: Component and Application
 1. Implement the event as follows:
 
     ```
-    <aura:event type="COMPONENT">
+    <aura:event type="APPLICATION">
         <aura:attribute name="searchKey" type="String"/>
     </aura:event>
     ```
