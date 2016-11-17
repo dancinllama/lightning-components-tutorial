@@ -60,19 +60,21 @@ In this module, you create a Lightning Component responsible for displaying the 
 1. Implement the Controller as follows:
 
     ```
-    doInit : function(component,event){
-        var action = component.get("c.findAll");
-        
-        action.setParams({
-            accountId : component.get("v.recordId")
-        });
-        
-        action.setCallback(this,function(a){
-            component.set("v.contacts",a.getReturnValue());
-        });
-        
-        $A.enqueueAction(action);
-    }
+    ({
+        doInit : function(component,event){
+            var action = component.get("c.findAll");
+
+            action.setParams({
+                accountId : component.get("v.recordId")
+            });
+
+            action.setCallback(this,function(a){
+                component.set("v.contacts",a.getReturnValue());
+            });
+
+            $A.enqueueAction(action);
+        }
+    })
     ```
 
     ### Code Highlights:
