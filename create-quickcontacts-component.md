@@ -60,9 +60,11 @@ In this module, you will learn how to use an interface to expose a Lightning Com
 5. Save the page layout.
 
 ## Step 5: Test the Quick Action
-1. Create an Account, and then open it in Lightning Experience.
-2. The Quick Action should show up in the top right of the screen as a Quick Action.
-3. Click on "Search Contacts", and you should see a screen similar to the following:
+1. Create an Account.
+2. Add contacts to the Account (these will be used later).
+3. View the Account in Lightning Experience.
+4. The Quick Action should show up in the top right of the screen as a Quick Action.
+5. Click on "Search Contacts", and you should see a screen similar to the following:
    - ![](images/lex_action_demo1.png)
 
 <div class="row" style="margin-top:40px;">
